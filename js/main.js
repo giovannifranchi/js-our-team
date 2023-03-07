@@ -101,9 +101,24 @@ function createCardsFromTemplate(template, arrayOfObj, container) {
     img.src = arrayOfObj[i].img;
     let cardFooter = card.lastElementChild;
     let name = cardFooter.firstElementChild;
-    name.innerText = `${arrayOfObj[i].firstName} ${arrayOfObj[i].lastName}`
+    name.innerText = `${arrayOfObj[i].firstName} ${arrayOfObj[i].lastName}`;
     let role = cardFooter.lastElementChild;
     role.innerText = arrayOfObj[i].role;
+    fragment.append(contentElement);
+  }
+  container.append(fragment);
+}
+
+function createCardsFromTemplateOptimized(template, arrayOfObj, container) {
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < arrayOfObj.length; i++) {
+    let contentElement = template.content.cloneNode(true);
+    let img = contentElement.firstElementChild.firstElementChild.firstElementChild;
+    let personName = img.nextElementSibling.firstElementChild;
+    let personRole = personName.nextElementSibling;
+    img.src = arrayOfObj[i].img;
+    personName.innerText = `${arrayOfObj[i].firstName} ${arrayOfObj[i].lastName}`;
+    personRole.innerText = arrayOfObj[i].role;
     fragment.append(contentElement);
   }
   container.append(fragment);
@@ -119,6 +134,6 @@ const template = document.getElementById("card");
 
 // createCards(persons, container);
 
-createCardsFromTemplate(template, persons, container);
+// createCardsFromTemplate(template, persons, container);
 
-
+createCardsFromTemplateOptimized(template, persons, container);
