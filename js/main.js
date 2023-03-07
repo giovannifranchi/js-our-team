@@ -43,6 +43,7 @@ const person6 = {
 
 
 const persons = [person1, person2, person3, person4, person5, person6];
+const container = document.querySelector('.container');
 
 function logProperties(arrayOfObj){
     for(let i = 0; i < arrayOfObj.length; i++){
@@ -52,6 +53,20 @@ function logProperties(arrayOfObj){
     }
 }
 
+function displayStrInDom(arrayOfObj, container){
+    const fragment = document.createDocumentFragment();
+    for(let i = 0; i < arrayOfObj.length; i++){
+        let divElement = document.createElement('div');
+        divElement.innerText = '';
+        for(let key in arrayOfObj[i]){
+            divElement.innerText += ` ${arrayOfObj[i][key]}`;
+        }
+        fragment.append(divElement);
+    }
+    container.append(fragment);
+}
+
 logProperties(persons);
 
+displayStrInDom(persons, container);
 
